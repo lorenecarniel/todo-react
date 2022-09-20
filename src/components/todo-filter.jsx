@@ -1,8 +1,9 @@
-export function TodoFilter() {
+import { Checkbox } from '@chakra-ui/react';
+
+export function TodoFilter({ filter, onToggle }) {
   return (
-    <div className="todo-filter">
-      <input id="filter-todo" type="checkbox" onChange={() => {}} />
-      <label htmlFor="filter-todo">Ocultar tarefas feitas</label>
-    </div>
+    <Checkbox checked={filter} onChange={onToggle} pl="3">
+      Ocultar tarefas feitas
+    </Checkbox>
   );
 }

@@ -1,10 +1,13 @@
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export function TodoForm({ onCreateTodo }) {
   const [newTodo, setNewTodo] = useState('');
 
   return (
-    <form
+    <Flex
+      as="form"
+      gap="3"
       className="todo-form"
       onSubmit={async e => {
         e.preventDefault();
@@ -13,13 +16,14 @@ export function TodoForm({ onCreateTodo }) {
         setNewTodo('');
       }}
     >
-      <input
-        id="todo-text"
-        type="text"
+      <Input
         value={newTodo}
+        placeholder="Adicionar nova tarefa"
         onChange={event => setNewTodo(event.target.value)}
       />
-      <button type="submit">Adicionar</button>
-    </form>
+      <Button type="submit" colorScheme="blue">
+        Adicionar
+      </Button>
+    </Flex>
   );
 }
