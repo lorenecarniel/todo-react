@@ -31,13 +31,14 @@ function App() {
   // TODO: async function onToggleTodoCompleted(id) {}
 
   return (
-    <div>
+    <div className="container">
       <h1>Nosso app To Do</h1>
 
-      <FilterTodos />
       <TodoForm onCreateTodo={onCreateTodo} />
 
-      <ul>
+      <FilterTodos />
+
+      <ul className="todo-list">
         {todos.map(todo => (
           <Todo key={todo.id} todo={todo} onDeleteTodo={onDeleteTodo} />
         ))}

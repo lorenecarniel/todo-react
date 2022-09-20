@@ -5,6 +5,7 @@ function TodoForm({ onCreateTodo }) {
 
   return (
     <form
+      className="todo-form"
       onSubmit={async e => {
         e.preventDefault();
         if (newTodo.trim() === '') return;
