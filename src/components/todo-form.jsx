@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TodoForm({ onCreateTodo }) {
+export function TodoForm({ onCreateTodo }) {
   const [newTodo, setNewTodo] = useState('');
 
   return (
@@ -23,5 +23,3 @@ function TodoForm({ onCreateTodo }) {
     </form>
   );
 }
-
-export default TodoForm;

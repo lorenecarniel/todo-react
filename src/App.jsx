@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Todo from './components/todo';
-import TodoForm from './components/todo-form';
-import FilterTodos from './components/filter-todos';
+import { Todo } from './components/todo';
+import { TodoForm } from './components/todo-form';
+import { TodoFilter } from './components/todo-filter';
 
-function App() {
+export function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function App() {
 
       <TodoForm onCreateTodo={onCreateTodo} />
 
-      <FilterTodos />
+      <TodoFilter />
 
       <ul className="todo-list">
         {todos.map(todo => (
@@ -46,5 +46,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -1,4 +1,4 @@
-function FilterTodos() {
+export function TodoFilter() {
   return (
     <div className="todo-filter">
       <input id="filter-todo" type="checkbox" onChange={() => {}} />
@@ -6,5 +6,3 @@ function FilterTodos() {
     </div>
   );
 }
-
-export default FilterTodos;

@@ -1,4 +1,4 @@
-function Todo({ todo, onDeleteTodo }) {
+export function Todo({ todo, onDeleteTodo }) {
   return (
     <li>
       <input id={todo.id} type="checkbox" checked={todo.completed} />
@@ -13,5 +13,3 @@ function Todo({ todo, onDeleteTodo }) {
     </li>
   );
 }
-
-export default Todo;
