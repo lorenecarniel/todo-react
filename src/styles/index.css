@@ -62,7 +62,7 @@
   flex: 1;
 }
 
-.todo-list li input[type='checkbox']::checked + label {
+.todo-list li input[type='checkbox']:checked + label {
   color: #ccc;
   text-decoration: line-through;
 }
