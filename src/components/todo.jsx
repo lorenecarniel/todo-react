@@ -1,6 +1,6 @@
 export function Todo({ todo, onDelete, onToggle }) {
   function onDeleteClick() {
-    // TODO: call onDelete with todo.id
+    onDelete(todo.id);
   }
 
   function onToggleClick() {

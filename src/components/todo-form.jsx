@@ -3,12 +3,14 @@ import { useState } from 'react';
 export function TodoForm({ onCreate }) {
   const [text, setText] = useState('');
 
-  async function onSubmit() {
-    // TODO: call onCreate with newTodo and reset newTodo
+  async function onSubmit(e) {
+    e.preventDefault();
+    onCreate(text);
+    setText("");
   }
 
   function onTextChange(event) {
-    // TODO: update the text state
+    setText(event.target.value);
   }
 
   return (

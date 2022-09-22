@@ -4,14 +4,17 @@ import { Todo } from './components/todo';
 import { TodoForm } from './components/todo-form';
 import { TodoFilter } from './components/todo-filter';
 
-const BASE_URL = 'http://localhost:3000/todos';
+const BASE_URL = 'http://localhost:3333/todos';
 
 export function App() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState(false);
 
   useEffect(() => {
-    // TODO: fetch todos from the server
+    axios.get(BASE_URL) 
+    .then(function (response){
+      setTodos(response.data);
+    })
   }, []);
 
   async function onCreateTodo(text) {
@@ -20,11 +23,15 @@ export function App() {
       content: text,
       completed: false,
     };
-    // TODO: create a new todo and add it to the list
+    axios.post(BASE_URL, newTodo)
+      .then(function (response){ 
+        setTodos([...todos, response.data]);
+      })
   }
 
   async function onDeleteTodo(id) {
-    // TODO: delete the todo from the server and remove it from the list
+     await axios.delete(BASE_URL+ "/" + id);
+     setTodos(todos.filter(todo => todo.id !== id));
   }
 
   async function onToggleTodo(id, value) {
@@ -45,12 +52,12 @@ export function App() {
     <div className="container">
       <h1>Nosso app To Do</h1>
 
-      <TodoForm onCreateTodo={onCreateTodo} />
+      <TodoForm onCreate={onCreateTodo} />
 
       <TodoFilter isChecked={filter} onToggle={onToggleFilter} />
 
       <ul className="todo-list">
-        {filteredTodos.map(todo => (
+        {todos.map(todo => (
           <Todo
             key={todo.id}
             todo={todo}
