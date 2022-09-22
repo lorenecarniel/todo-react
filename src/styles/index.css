@@ -62,6 +62,10 @@
   flex: 1;
 }
 
+.todo-list li button {
+  color: red;
+}
+
 .todo-list li input[type='checkbox']:checked + label {
   color: #ccc;
   text-decoration: line-through;

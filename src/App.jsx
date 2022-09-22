@@ -4,31 +4,42 @@ import { Todo } from './components/todo';
 import { TodoForm } from './components/todo-form';
 import { TodoFilter } from './components/todo-filter';
 
+const BASE_URL = 'http://localhost:3000/todos';
+
 export function App() {
   const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3333/todos')
-      .then(response => response.json())
-      .then(data => setTodos(data));
+    // TODO: fetch todos from the server
   }, []);
 
-  async function onCreateTodo(newTodo) {
-    const response = await axios.post('http://localhost:3333/todos', {
+  async function onCreateTodo(text) {
+    const newTodo = {
       id: Math.random(),
-      title: newTodo,
+      content: text,
       completed: false,
-    });
-
-    setTodos([...todos, response.data]);
+    };
+    // TODO: create a new todo and add it to the list
   }
 
   async function onDeleteTodo(id) {
-    await axios.delete(`http://localhost:3333/todos/${id}`);
-    setTodos(todos.filter(todo => todo.id !== id));
+    // TODO: delete the todo from the server and remove it from the list
   }
 
-  // TODO: async function onToggleTodoCompleted(id) {}
+  async function onToggleTodo(id, value) {
+    // TODO: toggle the completed property from the todo with the given id on the server and update it on the list
+  }
+
+  function onToggleFilter() {
+    // TODO: toggle the filter value between true and false
+  }
+
+  function filterTodos() {
+    // TODO: return the todos that are not completed if filter is true or all todos if filter is false
+  }
+
+  const filteredTodos = []; // TODO: call filterTodos
 
   return (
     <div className="container">
@@ -36,11 +47,16 @@ export function App() {
 
       <TodoForm onCreateTodo={onCreateTodo} />
 
-      <TodoFilter />
+      <TodoFilter isChecked={filter} onToggle={onToggleFilter} />
 
       <ul className="todo-list">
-        {todos.map(todo => (
-          <Todo key={todo.id} todo={todo} onDeleteTodo={onDeleteTodo} />
+        {filteredTodos.map(todo => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+            onDelete={onDeleteTodo}
+            onToggle={onToggleTodo}
+          />
         ))}
       </ul>
     </div>
