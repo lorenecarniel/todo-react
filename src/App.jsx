@@ -11,10 +11,9 @@ export function App() {
   const [filter, setFilter] = useState(false);
 
   useEffect(() => {
-    axios.get(BASE_URL) 
-    .then(function (response){
+    axios.get(BASE_URL).then(function (response) {
       setTodos(response.data);
-    })
+    });
   }, []);
 
   async function onCreateTodo(text) {
@@ -23,30 +22,34 @@ export function App() {
       content: text,
       completed: false,
     };
-    axios.post(BASE_URL, newTodo)
-      .then(function (response){ 
-        setTodos([...todos, response.data]);
-      })
+    axios.post(BASE_URL, newTodo).then(function (response) {
+      setTodos([...todos, response.data]);
+    });
   }
 
   async function onDeleteTodo(id) {
-     await axios.delete(BASE_URL+ "/" + id);
-     setTodos(todos.filter(todo => todo.id !== id));
+    await axios.delete(BASE_URL + '/' + id);
+    setTodos(todos.filter(todo => todo.id !== id));
   }
 
   async function onToggleTodo(id, value) {
-    // TODO: toggle the completed property from the todo with the given id on the server and update it on the list
+    await axios.put(BASE_URL + '/' + id, { completed: value });
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: value } : todo,
+      ),
+    );
   }
 
   function onToggleFilter() {
-    // TODO: toggle the filter value between true and false
+    setFilter(!filter);
   }
 
   function filterTodos() {
-    // TODO: return the todos that are not completed if filter is true or all todos if filter is false
+    return filter ? todos.filter(todo => !todo.completed) : todos;
   }
 
-  const filteredTodos = []; // TODO: call filterTodos
+  const filteredTodos = filterTodos();
 
   return (
     <div className="container">
@@ -57,7 +60,7 @@ export function App() {
       <TodoFilter isChecked={filter} onToggle={onToggleFilter} />
 
       <ul className="todo-list">
-        {todos.map(todo => (
+        {filteredTodos.map(todo => (
           <Todo
             key={todo.id}
             todo={todo}

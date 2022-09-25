@@ -4,7 +4,7 @@ export function Todo({ todo, onDelete, onToggle }) {
   }
 
   function onToggleClick() {
-    // TODO: call onToggle with todo.id and todo.completed new value
+    onToggle(todo.id, !todo.completed);
   }
 
   return (
