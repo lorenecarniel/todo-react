@@ -1,3 +1,4 @@
+import { Button, Flex, Input } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export function TodoForm({ onCreate }) {
@@ -6,7 +7,7 @@ export function TodoForm({ onCreate }) {
   async function onSubmit(e) {
     e.preventDefault();
     onCreate(text);
-    setText("");
+    setText('');
   }
 
   function onTextChange(event) {
@@ -14,9 +15,16 @@ export function TodoForm({ onCreate }) {
   }
 
   return (
-    <form className="todo-form" onSubmit={onSubmit}>
-      <input id="todo-text" type="text" value={text} onChange={onTextChange} />
-      <button type="submit">Adicionar</button>
-    </form>
+    <Flex as="form" gap="3" onSubmit={onSubmit}>
+      <Input
+        type="text"
+        value={text}
+        onChange={onTextChange}
+        placeholder="Crie sua tarefa"
+      />
+      <Button type="submit" colorScheme="blue">
+        Adicionar
+      </Button>
+    </Flex>
   );
 }
